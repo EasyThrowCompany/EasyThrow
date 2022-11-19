@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">EasyThrow</string>
+
+    <!-- Main Activity strings !-->
+    <string name="main_activity_first_button">Zrób zdjęcie</string>
+    <string name="main_activity_second_button">Wybierz zdjęcie z pamięci</string>
+    <string name="main_activity_third_button">O nas</string>
+
 </resources>

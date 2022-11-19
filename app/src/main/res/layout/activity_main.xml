@@ -10,25 +10,33 @@
     tools:context=".MainActivity">
 
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scaleType="fitCenter"
+        android:layout_weight="7"
+        app:srcCompat="@drawable/easythrow_mainactivity_image"/>
+
     <Button
-        android:id="@+id/btnChallenges"
+        android:id="@+id/btnTakePhoto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="2"
 
-        android:text="aaa"
-        android:textSize="20sp"
-        android:backgroundTint="@color/color_theme_bluegreen"
-        android:fontFamily="@font/ubuntu_bold"/>
-
-    <Button
-        android:id="@+id/btnEmotionsJournal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="2"
-
-        android:text="aaaa"
+        android:text="@string/main_activity_first_button"
         android:textSize="18sp"
+        android:backgroundTint="@color/color_theme_bluegreen"
+        android:fontFamily="@font/ubuntu_medium"/>
+
+    <Button
+        android:id="@+id/btnChooseImg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+
+        android:text="@string/main_activity_second_button"
+        android:textSize="18sp"
+        android:fontFamily="@font/ubuntu_medium"
         android:backgroundTint="@color/color_theme_bluegreen" />
 
     <Button
@@ -37,7 +45,9 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
 
-        android:text="aaa"
+        android:text="@string/main_activity_third_button"
         android:textSize="18sp"
+        android:fontFamily="@font/ubuntu_medium"
         android:backgroundTint="@color/color_theme_bluegreen" />
+
 </LinearLayout>
