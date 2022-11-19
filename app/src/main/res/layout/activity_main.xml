@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_marginHorizontal="6dp"
+    android:layout_marginVertical="10dp"
+    tools:context=".MainActivity">
+
+
+    <Button
+        android:id="@+id/btnChallenges"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+
+        android:text="aaa"
+        android:textSize="20sp"
+        android:backgroundTint="@color/color_theme_bluegreen"
+        android:fontFamily="@font/ubuntu_bold"/>
+
+    <Button
+        android:id="@+id/btnEmotionsJournal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+
+        android:text="aaaa"
+        android:textSize="18sp"
+        android:backgroundTint="@color/color_theme_bluegreen" />
+
+    <Button
+        android:id="@+id/btnAboutUs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+
+        android:text="aaa"
+        android:textSize="18sp"
+        android:backgroundTint="@color/color_theme_bluegreen" />
+</LinearLayout>
