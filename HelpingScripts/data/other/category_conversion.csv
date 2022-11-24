@@ -1,0 +1,60 @@
+old_category,new_category
+Cigarette,Mixed
+Unlabeled litter,ToDelete
+Plastic film,PlasticAndMetal
+Clear plastic bottle,PlasticAndMetal
+Other plastic,PlasticAndMetal
+Other plastic wrapper,PlasticAndMetal
+Drink can,PlasticAndMetal
+Plastic bottle cap,PlasticAndMetal
+Plastic straw,PlasticAndMetal
+Broken glass,Glass
+Styrofoam piece,Mixed
+Disposable plastic cup,PlasticAndMetal
+Glass bottle,Glass
+Pop tab,PlasticAndMetal
+Other carton,Paper
+Normal paper,Paper
+Metal bottle cap,PlasticAndMetal
+Plastic lid,PlasticAndMetal
+Paper cup,Paper
+Corrugated carton,Paper
+Aluminium foil,PlasticAndMetal
+Single-use carrier bag,PlasticAndMetal
+Other plastic bottle,PlasticAndMetal
+Drink carton,PlasticAndMetal
+Tissues,Mixed
+Crisp packet,PlasticAndMetal
+Disposable food container,PlasticAndMetal
+Plastic utensils,PlasticAndMetal
+Food Can,PlasticAndMetal
+Garbage bag,PlasticAndMetal
+Meal carton,Mixed
+Rope & strings,Mixed
+Paper bag,Paper
+Scrap metal,PlasticAndMetal
+Foam food container,Mixed
+Foam cup,Mixed
+Wrapping paper,Paper
+Magazine paper,Paper
+Egg carton,Paper
+Aerosol,PlasticAndMetal
+Metal,PlasticAndMetal
+Spread tub,PlasticAndMetal
+Food waste,Mixed
+Squeezable tube,PlasticAndMetal
+Shoe,Mixed
+Glass jar,Glass
+Other plastic container,PlasticAndMetal
+Glass cup,Glass
+Aluminium blister pack,PlasticAndMetal
+Toilet tube,Paper
+Six pack rings,PlasticAndMetal
+Paper straw,Mixed
+Plastic glooves,PlasticAndMetal
+Tupperware,PlasticAndMetal
+Polypropylene bag,Mixed
+Pizza box,Mixed
+Battery,WasteCollectionPoint
+Other plastic cup,PlasticAndMetal
+Carded blister pack,Mixed
