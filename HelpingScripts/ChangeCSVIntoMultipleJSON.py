@@ -90,9 +90,13 @@ while i < length:
     jsonAll = json.dumps(jsondata)
     head, tail = os.path.split(image_url)
     staticPathDirectory = 'data/JSONs/'
+
+    if not os.path.isdir(staticPathDirectory):
+        os.mkdir(staticPathDirectory)
+
     directory = staticPathDirectory + head
 
-    if(not os.path.isdir(directory)):
+    if not os.path.isdir(directory):
         os.mkdir(directory)
 
     pathname, extension = os.path.splitext(image_url)
