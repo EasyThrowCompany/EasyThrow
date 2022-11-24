@@ -52,6 +52,12 @@ objects.rename(columns={'img_file': 'image_url'}, inplace=True)
 
 print(objects)
 
+# Creating validation and training datasets
+trainData = ''
+validateData = ''
+ratio = 5 # 4 to 1
+ratioIterator = 0
+
 # Save every image to different JSON file
 jsondata = {}
 i = 0
@@ -85,9 +91,18 @@ while i < length:
     jsondata['image_details'] = image_details
     jsondata['label'] = label
     # print(jsondata)
-    print(json.dumps(jsondata, indent=4))
+    # print(json.dumps(jsondata, indent=4))
 
     jsonAll = json.dumps(jsondata)
+
+    if ratioIterator % ratio == 0:
+        validateData = validateData + jsonAll + '\n'
+    else:
+        trainData = trainData + jsonAll + '\n'
+
+    ratioIterator = ratioIterator + 1
+
+    # print(jsonAll)
     head, tail = os.path.split(image_url)
     staticPathDirectory = 'data/JSONs/'
 
@@ -104,7 +119,16 @@ while i < length:
     file = open(path, 'w')
     json.dump(jsondata, file, indent=4)
 
+staticPathDirectory = 'data/JSONs/'
+#Save Training json
+file = open(staticPathDirectory + 'trainData.jsonl', 'w')
+file.write(trainData)
+file.close()
 
+#Save Validate json
+file = open(staticPathDirectory + 'validateDate.jsonl', 'w')
+file.write(trainData)
+file.close()
 
 
 
