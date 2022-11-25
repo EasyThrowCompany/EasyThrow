@@ -6,4 +6,6 @@
     <string name="main_activity_second_button">Wybierz zdjęcie z pamięci</string>
     <string name="main_activity_third_button">O nas</string>
 
+    <string name="camera_activity_take_photo">Take photo</string>
+
 </resources>
