@@ -15,11 +15,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button takePhotoBtn = findViewById(R.id.btnTakePhoto);
-
         takePhotoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent intent = new Intent(view.getContext(), CameraActivity.class);
                 view.getContext().startActivity(intent);
             }

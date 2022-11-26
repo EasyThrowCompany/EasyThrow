@@ -7,5 +7,6 @@
     <string name="main_activity_third_button">O nas</string>
 
     <string name="camera_activity_take_photo">Take photo</string>
+    <string name="camera_activity_open_camera">Open camera</string>
 
 </resources>
