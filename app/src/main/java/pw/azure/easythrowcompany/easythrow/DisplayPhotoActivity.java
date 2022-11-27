@@ -71,21 +71,9 @@ public class DisplayPhotoActivity extends AppCompatActivity {
         photoIv.setImageBitmap(bmp);
 
 
-//        int size = bitmap.getRowBytes() * bitmap.getHeight();
-//        ByteBuffer byteBuffer = ByteBuffer.allocate(size);
-//        bitmap.copyPixelsToBuffer(byteBuffer);
-//        byte[] byteArray = byteBuffer.array();
-
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
         byte[] byteArray = stream.toByteArray();
-
-        System.out.println("TERAZ BYTE ARRAY");
-//        Systetem.out.println(size);
-        System.out.println(byteArray.toString());
-
-//        InputStream ip = getAssets().open();
-
         Button uploadBtn = findViewById(R.id.confirmBtn);
         Bitmap finalBitmap = bitmap;
         uploadBtn.setOnClickListener(new View.OnClickListener() {
@@ -93,36 +81,13 @@ public class DisplayPhotoActivity extends AppCompatActivity {
             public void onClick(View view) {
                 OkHttpClient client = new OkHttpClient();
 
-//                RequestBody body = new MultipartBody.Builder()
-//                        .setType(MultipartBody.FORM)
-//                        .addFormDataPart("image", "filename.bmp",
-//                        RequestBody.create(MediaType.parse("image/*bmp"), encodeTobase64(finalBitmap)))
-//                        .build();
-
                 RequestBody body = RequestBody.create(MediaType.parse("image/jpeg"), byteArray);
 
-                RequestBody testbody = RequestBody.create(
-                        MediaType.parse("application/text"), "");
 
                 Request request = new Request.Builder()
                         .url(url)
                         .post(body)
                         .build();
-
-//                Call call = client.newCall(request).;
-//                Response response = null;
-//                try {
-//                    response = call.execute();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//
-//                System.out.println(response);
-//                if(response != null)
-//                {
-//                    System.out.println(response.code());
-//                    System.out.println(response.body());
-//                }
 
                 client.newCall(request).enqueue(new Callback() {
                     @Override
