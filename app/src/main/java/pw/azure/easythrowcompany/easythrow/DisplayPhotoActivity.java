@@ -2,7 +2,6 @@ package pw.azure.easythrowcompany.easythrow;
 
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
@@ -10,11 +9,9 @@ import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -42,13 +39,8 @@ public class DisplayPhotoActivity extends AppCompatActivity {
         ImageView photoIv = findViewById(R.id.capturedImageView);
         Bundle extras = getIntent().getExtras();
         Uri imageUri = Uri.parse(extras.getString("imageUri"));
-        //photoIv.setImageURI(imageUri);
-
-        ProgressBar progressBar = findViewById(R.id.uploadPb);
 
         String json = "{\"image_uri\": \"abcccccccccc\"}";
-
-
 
         Bitmap bitmap = null;
         try {
@@ -83,7 +75,6 @@ public class DisplayPhotoActivity extends AppCompatActivity {
 
                 RequestBody body = RequestBody.create(MediaType.parse("image/jpeg"), byteArray);
 
-
                 Request request = new Request.Builder()
                         .url(url)
                         .post(body)
@@ -109,12 +100,7 @@ public class DisplayPhotoActivity extends AppCompatActivity {
                             });
                         }
                         else{
-                            System.out.println("NIE PRZESZLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
-                            String myResponse2 = response.request().body().toString();
-                            String myResponse = response.body().string();
-                            System.out.println(myResponse);
-                            System.out.println(myResponse2);
-                            System.out.println(byteArray.toString());
+                            System.out.println("Not uploaded.");
                         }
                     }
                 });
@@ -135,22 +121,6 @@ public class DisplayPhotoActivity extends AppCompatActivity {
         Matrix matrix = new Matrix();
         matrix.postRotate(angle);
         return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
-    }
-
-    public static String encodeTobase64(Bitmap image)
-    {
-        Bitmap immagex=image;
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        immagex.compress(Bitmap.CompressFormat.PNG, 100, baos);
-        byte[] b = baos.toByteArray();
-        String imageEncoded = Base64.encodeToString(b,Base64.DEFAULT);
-        return imageEncoded;
-    }
-
-    public static Bitmap decodeBase64(String input)
-    {
-        byte[] decodedByte = Base64.decode(input, 0);
-        return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
     }
 
     @Override
