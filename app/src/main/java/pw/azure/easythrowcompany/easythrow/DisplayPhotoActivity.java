@@ -50,7 +50,7 @@ public class DisplayPhotoActivity extends AppCompatActivity {
         }
 
         bitmap = RotateBitmap(bitmap, 90);
-        Bitmap bmp = Bitmap.createBitmap(bitmap.getWidth(),bitmap.getHeight(), Bitmap.Config.RGB_565);
+        Bitmap bmp = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.RGB_565);
 
 
         Canvas canvas = new Canvas(bmp);
@@ -58,23 +58,22 @@ public class DisplayPhotoActivity extends AppCompatActivity {
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(10);
         paint.setColor(Color.RED);
-        canvas.drawBitmap(bitmap,0,0, null);
-        canvas.drawRect(0,0,100,100, paint);
+        canvas.drawBitmap(bitmap, 0, 0, null);
+        canvas.drawRect(0, 0, 100, 100, paint);
         photoIv.setImageBitmap(bmp);
 
 
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
         byte[] byteArray = stream.toByteArray();
+
         Button uploadBtn = findViewById(R.id.confirmBtn);
-        Bitmap finalBitmap = bitmap;
         uploadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 OkHttpClient client = new OkHttpClient();
 
                 RequestBody body = RequestBody.create(MediaType.parse("image/jpeg"), byteArray);
-
                 Request request = new Request.Builder()
                         .url(url)
                         .post(body)
@@ -98,8 +97,7 @@ public class DisplayPhotoActivity extends AppCompatActivity {
                                     // TODO
                                 }
                             });
-                        }
-                        else{
+                        } else {
                             System.out.println("Not uploaded.");
                         }
                     }
@@ -116,8 +114,7 @@ public class DisplayPhotoActivity extends AppCompatActivity {
         });
     }
 
-    public static Bitmap RotateBitmap(Bitmap source, float angle)
-    {
+    public static Bitmap RotateBitmap(Bitmap source, float angle) {
         Matrix matrix = new Matrix();
         matrix.postRotate(angle);
         return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
