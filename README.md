@@ -1,10 +1,11 @@
 # EasyThrow
+![alt text](https://github.com/EasyThrowCompany/EasyThrow/blob/mobile-app/app/src/main/res/drawable/easythrow_mainactivity_image.png?raw=true)
+
 #### Contributors
 
 - [Michał Ziober](https://github.com/micha5555)
 - [Maja Nagarnowicz](https://github.com/nebraszka)
 - [Jakub Maciejewski](https://github.com/PiorunPL)
-![alt text](https://github.com/EasyThrowCompany/EasyThrow/blob/mobile-app/app/src/main/res/drawable/easythrow_mainactivity_image.png?raw=true)
 
 We are third-year students of Applied Computer Science at the Faculty of Electrical Engineering at Warsaw University of Technology.
 
