@@ -46,8 +46,8 @@ public class DisplayPhotoActivity extends AppCompatActivity {
             public void onClick(View view) {
                 OkHttpClient client = new OkHttpClient();
                 RequestBody body = RequestBody.create(
-                                MediaType.parse("application/json"),
-                                json
+                        MediaType.parse("application/json"),
+                        json
                 );
                 Request request = new Request.Builder()
                         .url(url)

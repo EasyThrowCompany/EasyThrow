@@ -3,6 +3,7 @@ package pw.azure.easythrowcompany.easythrow;
 import android.Manifest;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -103,9 +104,11 @@ public class CameraActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == REQUEST_CODE) {
             permissionManager.handlePermissionResult(CameraActivity.this, REQUEST_CODE, permissions, grantResults);
-            openCamera();
-            captureBtn.setVisibility(View.VISIBLE);
-            openCameraBtn.setVisibility(View.GONE);
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                openCamera();
+                captureBtn.setVisibility(View.VISIBLE);
+                openCameraBtn.setVisibility(View.GONE);
+            }
         }
     }
 
@@ -113,7 +116,7 @@ public class CameraActivity extends AppCompatActivity {
         long timestamp = System.currentTimeMillis();
         ContentValues contentValues = new ContentValues();
         contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, timestamp);
-        contentValues.put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg");
+        contentValues.put(MediaStore.MediaColumns.MIME_TYPE, "image/bmp");
 
         imageCapture.takePicture(new ImageCapture.OutputFileOptions.Builder(getContentResolver(),
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues).build(), getExecutor(), new ImageCapture.OnImageSavedCallback() {

@@ -21,7 +21,8 @@
             android:id="@+id/previewView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="90" />
+            android:layout_weight="90"
+            android:background="@drawable/iris_close"/>
 
         <LinearLayout
             android:layout_width="match_parent"
