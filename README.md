@@ -19,12 +19,12 @@ The aim of the project is to create a mobile app that will enable its users to e
 
 Based on the photo taken by the user, the app recognises the types of rubbish presented in the photo and marks them according to the bin into which they should be placed.
 
-### Description of the technologies used
+### Map of technologies
+![image](model/technologie.png)
 
+### Description of the technologies used
 
 ### Installation
 
 Make sure you're in the "Code" section of the projects github repository, then look for a link near top center named "releases". Click that, and the top release should be the most current compiled APK marked "Latest release" which you can install by clicking its link.
 
-### Map of technologies
-![image](model/technologie.png)
