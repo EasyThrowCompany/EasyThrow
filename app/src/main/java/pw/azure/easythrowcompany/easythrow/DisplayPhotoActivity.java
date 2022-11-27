@@ -20,12 +20,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.nio.ByteBuffer;
 
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
-import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -73,14 +71,14 @@ public class DisplayPhotoActivity extends AppCompatActivity {
         photoIv.setImageBitmap(bmp);
 
 
-        int size = bitmap.getRowBytes() * bitmap.getHeight();
-        ByteBuffer byteBuffer = ByteBuffer.allocate(size);
-        bitmap.copyPixelsToBuffer(byteBuffer);
-        byte[] byteArray = byteBuffer.array();
+//        int size = bitmap.getRowBytes() * bitmap.getHeight();
+//        ByteBuffer byteBuffer = ByteBuffer.allocate(size);
+//        bitmap.copyPixelsToBuffer(byteBuffer);
+//        byte[] byteArray = byteBuffer.array();
 
-//        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-//        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-//        byte[] byteArray = stream.toByteArray();
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
 
         System.out.println("TERAZ BYTE ARRAY");
 //        Systetem.out.println(size);
@@ -95,11 +93,13 @@ public class DisplayPhotoActivity extends AppCompatActivity {
             public void onClick(View view) {
                 OkHttpClient client = new OkHttpClient();
 
-                RequestBody body = new MultipartBody.Builder()
-                        .setType(MultipartBody.FORM)
-                        .addFormDataPart("image", "filename.bmp",
-                        RequestBody.create(MediaType.parse("image/*bmp"), encodeTobase64(finalBitmap)))
-                        .build();
+//                RequestBody body = new MultipartBody.Builder()
+//                        .setType(MultipartBody.FORM)
+//                        .addFormDataPart("image", "filename.bmp",
+//                        RequestBody.create(MediaType.parse("image/*bmp"), encodeTobase64(finalBitmap)))
+//                        .build();
+
+                RequestBody body = RequestBody.create(MediaType.parse("image/jpeg"), byteArray);
 
                 RequestBody testbody = RequestBody.create(
                         MediaType.parse("application/text"), "");
