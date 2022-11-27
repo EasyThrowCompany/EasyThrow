@@ -13,4 +13,9 @@ public class AboutUsActivity extends AppCompatActivity {
         setContentView(R.layout.about_us);
 
     }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 }

@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -53,21 +54,6 @@ public class DisplayPhotoActivity extends AppCompatActivity {
                         .post(body)
                         .build();
 
-//                Call call = client.newCall(request).;
-//                Response response = null;
-//                try {
-//                    response = call.execute();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//
-//                System.out.println(response);
-//                if(response != null)
-//                {
-//                    System.out.println(response.code());
-//                    System.out.println(response.body());
-//                }
-
                 client.newCall(request).enqueue(new Callback() {
                     @Override
                     public void onFailure(Call call, IOException e) {
@@ -83,7 +69,7 @@ public class DisplayPhotoActivity extends AppCompatActivity {
                             DisplayPhotoActivity.this.runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    // TODO
+                                    Toast.makeText(DisplayPhotoActivity.this, myResponse, Toast.LENGTH_SHORT).show();
                                 }
                             });
                         }
