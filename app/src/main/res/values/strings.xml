@@ -2,11 +2,16 @@
     <string name="app_name">EasyThrow</string>
 
     <!-- Main Activity strings !-->
-    <string name="main_activity_first_button">Zrób zdjęcie</string>
-    <string name="main_activity_second_button">Wybierz zdjęcie z pamięci</string>
-    <string name="main_activity_third_button">O nas</string>
+    <string name="main_activity_first_button">Take photo</string>
+    <string name="main_activity_second_button">Get photo from gallery</string>
+    <string name="main_activity_third_button">About us</string>
 
+    <!-- Camera Activity strings !-->
     <string name="camera_activity_take_photo">Take photo</string>
     <string name="camera_activity_open_camera">Open camera</string>
+
+    <!-- Display Photo Activity strings !-->
+    <string name="captured_image_confirm">Confirm</string>
+    <string name="captured_image_retake">Retake</string>
 
 </resources>

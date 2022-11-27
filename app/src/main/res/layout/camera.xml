@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:padding="10dp">
+    android:padding="10dp"
+    tools:context=".MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,27 +26,27 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:orientation="horizontal"
-            android:layout_weight="10">
+            android:layout_weight="10"
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/openCameraBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:text="@string/camera_activity_open_camera"
                 android:layout_gravity="center"
-                android:layout_weight="5"/>
+                android:layout_marginStart="10dp"
+                android:layout_weight="5"
+                android:text="@string/camera_activity_open_camera" />
 
             <Button
                 android:id="@+id/captureBtn"
-                android:layout_marginStart="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/camera_activity_take_photo"
                 android:layout_gravity="center"
+                android:layout_marginStart="10dp"
                 android:layout_weight="15"
-                />
+                android:text="@string/camera_activity_take_photo"
+                android:visibility="gone" />
 
         </LinearLayout>
     </LinearLayout>

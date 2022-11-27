@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_marginHorizontal="6dp"
     android:layout_marginVertical="10dp"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:scaleType="fitCenter"
         android:layout_weight="7"
-        app:srcCompat="@drawable/easythrow_mainactivity_image"/>
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/easythrow_mainactivity_image" />
 
     <Button
         android:id="@+id/btnTakePhoto"
@@ -23,10 +23,10 @@
         android:layout_height="wrap_content"
         android:layout_weight="2"
 
-        android:text="@string/main_activity_first_button"
-        android:textSize="18sp"
         android:backgroundTint="@color/color_theme_bluegreen"
-        android:fontFamily="@font/ubuntu_medium"/>
+        android:fontFamily="@font/ubuntu_medium"
+        android:text="@string/main_activity_first_button"
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/btnChooseImg"
@@ -34,10 +34,10 @@
         android:layout_height="wrap_content"
         android:layout_weight="2"
 
-        android:text="@string/main_activity_second_button"
-        android:textSize="18sp"
+        android:backgroundTint="@color/color_theme_bluegreen"
         android:fontFamily="@font/ubuntu_medium"
-        android:backgroundTint="@color/color_theme_bluegreen" />
+        android:text="@string/main_activity_second_button"
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/btnAboutUs"
@@ -45,9 +45,9 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
 
-        android:text="@string/main_activity_third_button"
-        android:textSize="18sp"
+        android:backgroundTint="@color/color_theme_bluegreen"
         android:fontFamily="@font/ubuntu_medium"
-        android:backgroundTint="@color/color_theme_bluegreen" />
+        android:text="@string/main_activity_third_button"
+        android:textSize="18sp" />
 
 </LinearLayout>

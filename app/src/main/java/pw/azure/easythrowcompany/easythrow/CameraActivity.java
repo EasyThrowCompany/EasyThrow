@@ -2,6 +2,8 @@ package pw.azure.easythrowcompany.easythrow;
 
 import android.Manifest;
 import android.content.ContentValues;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
@@ -29,11 +31,12 @@ public class CameraActivity extends AppCompatActivity {
     public static final int REQUEST_CODE = 101;
 
     PreviewView previewView;
-    private Button captureBtn, openCameraBtn;
     private ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
     private PermissionManager permissionManager;
-    private String[] permissions = {Manifest.permission.CAMERA};
+    private final String[] permissions = {Manifest.permission.CAMERA};
     private ImageCapture imageCapture;
+    private Uri imageUri;
+    private Button captureBtn, openCameraBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,10 +53,11 @@ public class CameraActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (!permissionManager.checkPermissions(permissions)) {
-                    permissionManager.askPermissions(CameraActivity.this,
-                            permissions, REQUEST_CODE);
+                    permissionManager.askPermissions(CameraActivity.this, permissions, REQUEST_CODE);
                 } else {
                     openCamera();
+                    captureBtn.setVisibility(View.VISIBLE);
+                    openCameraBtn.setVisibility(View.GONE);
                 }
             }
         });
@@ -98,9 +102,10 @@ public class CameraActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == REQUEST_CODE) {
-            permissionManager.handlePermissionResult(CameraActivity.this,
-                    REQUEST_CODE, permissions, grantResults);
+            permissionManager.handlePermissionResult(CameraActivity.this, REQUEST_CODE, permissions, grantResults);
             openCamera();
+            captureBtn.setVisibility(View.VISIBLE);
+            openCameraBtn.setVisibility(View.GONE);
         }
     }
 
@@ -110,23 +115,28 @@ public class CameraActivity extends AppCompatActivity {
         contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, timestamp);
         contentValues.put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg");
 
-        imageCapture.takePicture(
-                new ImageCapture.OutputFileOptions.Builder(getContentResolver(),
-                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                        contentValues
-                ).build(),
-                getExecutor(),
-                new ImageCapture.OnImageSavedCallback() {
-                    @Override
-                    public void onImageSaved(@NonNull ImageCapture.OutputFileResults outputFileResults) {
-                        Toast.makeText(CameraActivity.this, "Photo has been saved.", Toast.LENGTH_SHORT).show();
-                    }
+        imageCapture.takePicture(new ImageCapture.OutputFileOptions.Builder(getContentResolver(),
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues).build(), getExecutor(), new ImageCapture.OnImageSavedCallback() {
+            @Override
+            public void onImageSaved(@NonNull ImageCapture.OutputFileResults outputFileResults) {
+                Toast.makeText(CameraActivity.this, "Photo has been saved.", Toast.LENGTH_SHORT).show();
+                imageUri = outputFileResults.getSavedUri();
 
-                    @Override
-                    public void onError(@NonNull ImageCaptureException exception) {
-                        Toast.makeText(CameraActivity.this, "Photo has not been saved." + exception.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                        System.err.println(exception);
-                    }
-                });
+                Intent i = new Intent(CameraActivity.this, DisplayPhotoActivity.class);
+                i.putExtra("imageUri", imageUri.toString());
+                startActivity(i);
+            }
+
+            @Override
+            public void onError(@NonNull ImageCaptureException exception) {
+                Toast.makeText(CameraActivity.this, "Photo has not been saved: " + exception.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 }
