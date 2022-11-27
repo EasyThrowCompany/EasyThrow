@@ -5,38 +5,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginHorizontal="6dp"
-    android:layout_marginVertical="10dp"
+    android:layout_marginVertical="20dp"
     android:orientation="vertical"
-    tools:context=".MainActivity">
-
+    tools:context=".AboutUsActivity">
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="7"
+        android:layout_weight="3"
         android:scaleType="fitCenter"
         app:srcCompat="@drawable/easythrow_mainactivity_image" />
 
-    <Button
-        android:id="@+id/takePhotoBtn"
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/team" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fontFamily="@font/ubuntu_medium"
+        android:textSize="18dp"
+        android:text="@string/about_us_text"
         android:layout_weight="2"
+        android:gravity="center"/>
 
-        android:backgroundTint="@color/color_theme_bluegreen"
-        android:fontFamily="@font/ubuntu_medium"
-        android:text="@string/main_activity_first_button"
-        android:textSize="18sp" />
-
-    <Button
-        android:id="@+id/aboutUsBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-
-        android:backgroundTint="@color/color_theme_bluegreen"
-        android:fontFamily="@font/ubuntu_medium"
-        android:text="@string/main_activity_third_button"
-        android:textSize="18sp" />
 
 </LinearLayout>

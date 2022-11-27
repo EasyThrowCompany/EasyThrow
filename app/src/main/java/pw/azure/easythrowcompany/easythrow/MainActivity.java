@@ -14,11 +14,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button takePhotoBtn = findViewById(R.id.btnTakePhoto);
+        Button takePhotoBtn = findViewById(R.id.takePhotoBtn);
         takePhotoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), CameraActivity.class);
+                view.getContext().startActivity(intent);
+            }
+        });
+
+        Button aboutUsBtn = findViewById(R.id.aboutUsBtn);
+        aboutUsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), AboutUsActivity.class);
                 view.getContext().startActivity(intent);
             }
         });

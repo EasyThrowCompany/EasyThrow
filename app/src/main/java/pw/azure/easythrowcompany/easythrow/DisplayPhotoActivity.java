@@ -19,7 +19,7 @@ import okhttp3.Response;
 
 public class DisplayPhotoActivity extends AppCompatActivity {
 
-    private final String url = "https://convert-to-labeled.azurewebsites.net/api/HttpTrigger2";
+    private final String url = "https://convert-to-labeled.azurewebsites.net/api/HttpTrigger1";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +52,7 @@ public class DisplayPhotoActivity extends AppCompatActivity {
                         if (response.isSuccessful()) {
                             String myResponse = response.body().string();
                             System.out.println(myResponse);
+                            System.out.println(imageUri);
                             DisplayPhotoActivity.this.runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
