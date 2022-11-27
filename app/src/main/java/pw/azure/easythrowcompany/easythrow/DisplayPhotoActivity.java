@@ -20,7 +20,7 @@ import okhttp3.Response;
 
 public class DisplayPhotoActivity extends AppCompatActivity {
 
-    private final String url = "http://20.67.122.191:80/api/v1/service/testend/score";
+    private final String url = "https://convert-to-labeled.azurewebsites.net/api/HttpTrigger2";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
