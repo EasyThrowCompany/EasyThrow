@@ -1,6 +1,8 @@
 package pw.azure.easythrowcompany.easythrow;
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
@@ -8,6 +10,7 @@ import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -15,6 +18,7 @@ import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
@@ -31,6 +35,7 @@ public class DisplayPhotoActivity extends AppCompatActivity {
 
     private final String url = "http://20.67.122.191/api/v1/service/testend/score";
 
+    @SuppressLint("WrongThread")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,14 +78,32 @@ public class DisplayPhotoActivity extends AppCompatActivity {
         bitmap.copyPixelsToBuffer(byteBuffer);
         byte[] byteArray = byteBuffer.array();
 
+//        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+//        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+//        byte[] byteArray = stream.toByteArray();
+
+        System.out.println("TERAZ BYTE ARRAY");
+//        Systetem.out.println(size);
+        System.out.println(byteArray.toString());
+
+//        InputStream ip = getAssets().open();
+
         Button uploadBtn = findViewById(R.id.confirmBtn);
+        Bitmap finalBitmap = bitmap;
         uploadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 OkHttpClient client = new OkHttpClient();
-                RequestBody body = MultipartBody.create(MediaType.parse("application/octet-stream"),byteArray);
+
+                RequestBody body = new MultipartBody.Builder()
+                        .setType(MultipartBody.FORM)
+                        .addFormDataPart("image", "filename.bmp",
+                        RequestBody.create(MediaType.parse("image/*bmp"), encodeTobase64(finalBitmap)))
+                        .build();
+
                 RequestBody testbody = RequestBody.create(
                         MediaType.parse("application/text"), "");
+
                 Request request = new Request.Builder()
                         .url(url)
                         .post(body)
@@ -122,8 +145,10 @@ public class DisplayPhotoActivity extends AppCompatActivity {
                         }
                         else{
                             System.out.println("NIE PRZESZLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
+                            String myResponse2 = response.request().body().toString();
                             String myResponse = response.body().string();
                             System.out.println(myResponse);
+                            System.out.println(myResponse2);
                             System.out.println(byteArray.toString());
                         }
                     }
@@ -145,6 +170,22 @@ public class DisplayPhotoActivity extends AppCompatActivity {
         Matrix matrix = new Matrix();
         matrix.postRotate(angle);
         return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
+    }
+
+    public static String encodeTobase64(Bitmap image)
+    {
+        Bitmap immagex=image;
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        immagex.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        byte[] b = baos.toByteArray();
+        String imageEncoded = Base64.encodeToString(b,Base64.DEFAULT);
+        return imageEncoded;
+    }
+
+    public static Bitmap decodeBase64(String input)
+    {
+        byte[] decodedByte = Base64.decode(input, 0);
+        return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
     }
 
     @Override
