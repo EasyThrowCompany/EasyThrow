@@ -39,7 +39,6 @@ public class DisplayPhotoActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(this, CameraActivity.class);
-        startActivity(intent);
+        finish();
     }
 }
