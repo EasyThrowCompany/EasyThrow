@@ -29,17 +29,6 @@
         android:textSize="18sp" />
 
     <Button
-        android:id="@+id/btnChooseImg"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="2"
-
-        android:backgroundTint="@color/color_theme_bluegreen"
-        android:fontFamily="@font/ubuntu_medium"
-        android:text="@string/main_activity_second_button"
-        android:textSize="18sp" />
-
-    <Button
         android:id="@+id/btnAboutUs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

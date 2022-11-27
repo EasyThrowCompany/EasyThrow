@@ -11,7 +11,7 @@
     <string name="camera_activity_open_camera">Open camera</string>
 
     <!-- Display Photo Activity strings !-->
-    <string name="captured_image_confirm">Confirm</string>
+    <string name="captured_image_upload">Upload</string>
     <string name="captured_image_retake">Retake</string>
 
 </resources>

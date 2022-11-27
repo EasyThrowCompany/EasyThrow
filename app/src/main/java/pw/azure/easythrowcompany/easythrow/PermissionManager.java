@@ -66,6 +66,8 @@ public class PermissionManager {
         return isAllPermissionsGranted;
     }
 
+    // TODO : Support for camera access denial - it's not working correct.
+
     void showPermissionRational(Activity activity, int requestCode, String[] permissions, String deniedPermission) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(activity, deniedPermission)) {
