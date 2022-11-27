@@ -14,4 +14,7 @@
     <string name="captured_image_upload">Upload</string>
     <string name="captured_image_retake">Retake</string>
 
+     <!-- About Us Section !-->
+    <string name="about_us_text">We are third-year students of Applied Computer Science at the Faculty of Electrical Engineering at Warsaw University of Technology.</string>
+
 </resources>
