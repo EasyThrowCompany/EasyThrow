@@ -26,4 +26,5 @@ Based on the photo taken by the user, the app recognises the types of rubbish pr
 
 Make sure you're in the "Code" section of the projects github repository, then look for a link near top center named "releases". Click that, and the top release should be the most current compiled APK marked "Latest release" which you can install by clicking its link.
 
+### Map of technologies
 ![image](model/technologie.png)
