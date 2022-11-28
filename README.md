@@ -19,6 +19,9 @@ The aim of the project is to create a mobile app that will enable its users to e
 
 Based on the photo taken by the user, the app recognises the types of rubbish presented in the photo and marks them according to the bin into which they should be placed.
 
+### Application demo
+Link: [YouTube](https://youtube.com/shorts/tqMIyTPcwEg?feature=share)
+
 ### Map of technologies
 ![image](model/technologie.png)
 
