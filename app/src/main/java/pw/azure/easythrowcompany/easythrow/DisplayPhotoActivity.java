@@ -12,7 +12,6 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -47,11 +46,9 @@ public class DisplayPhotoActivity extends AppCompatActivity {
         Uri imageUri = Uri.parse(extras.getString("imageUri"));
         photoIv.setImageURI(imageUri);
 
-        ProgressBar progressBar = findViewById(R.id.uploadPb);
+//        ProgressBar progressBar = findViewById(R.id.uploadPb);
 
         String json = "{\"image_uri\": \"abcccccccccc\"}";
-
-
 
         Bitmap bitmap = null;
         try {
@@ -61,22 +58,12 @@ public class DisplayPhotoActivity extends AppCompatActivity {
         }
 
         bitmap = RotateBitmap(bitmap, 90);
-        Bitmap bmp = Bitmap.createBitmap(bitmap.getWidth(),bitmap.getHeight(), Bitmap.Config.RGB_565);
-
-
-//        Canvas canvas = new Canvas(bmp);
-//        Paint paint = new Paint();
-//        paint.setStyle(Paint.Style.STROKE);
-//        paint.setStrokeWidth(10);
-//        paint.setColor(Color.RED);
-//        canvas.drawBitmap(bitmap,0,0, null);
-//        canvas.drawRect(0,0,100,100, paint);
-//        photoIv.setImageBitmap(bmp);
-
+        Bitmap bmp = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.RGB_565);
 
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
         byte[] byteArray = stream.toByteArray();
+
         Button uploadBtn = findViewById(R.id.confirmBtn);
         Bitmap finalBitmap = bitmap;
         uploadBtn.setOnClickListener(new View.OnClickListener() {
@@ -85,8 +72,6 @@ public class DisplayPhotoActivity extends AppCompatActivity {
                 OkHttpClient client = new OkHttpClient();
 
                 RequestBody body = RequestBody.create(MediaType.parse("image/jpeg"), byteArray);
-
-
                 Request request = new Request.Builder()
                         .url(url)
                         .post(body)
@@ -117,14 +102,8 @@ public class DisplayPhotoActivity extends AppCompatActivity {
                                     // TODO
                                 }
                             });
-                        }
-                        else{
-                            System.out.println("NIE PRZESZLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
-                            String myResponse2 = response.request().body().toString();
-                            String myResponse = response.body().string();
-                            System.out.println(myResponse);
-                            System.out.println(myResponse2);
-                            System.out.println(byteArray.toString());
+                        } else {
+                            System.out.println("Not uploaded.");
                         }
                     }
                 });
@@ -140,7 +119,7 @@ public class DisplayPhotoActivity extends AppCompatActivity {
         });
     }
 
-    public static void DrawRectanglesFromJSONResponse(String response, Bitmap bitmap, ImageView imageView) throws IOException, ParseException, JSONException {
+    public static void DrawRectanglesFromJSONResponse(String response, Bitmap bitmap, ImageView imageView) throws IOException, ParseException, JSONException, JSONException {
 
         Bitmap bmp = Bitmap.createBitmap(bitmap.getWidth(),bitmap.getHeight(), Bitmap.Config.RGB_565);
         Canvas canvas = new Canvas(bmp);
@@ -157,7 +136,7 @@ public class DisplayPhotoActivity extends AppCompatActivity {
         // iterating phoneNumbers
 
         for (int i = 0; i < boxes.length(); i++) {
-            JSONObject box = boxes.getJSONObject(i).getJSONObject("box");
+            JSONObject box = ((JSONArray) boxes).getJSONObject(i).getJSONObject("box");
             double topX = box.getDouble("topX");
             double topY = box.getDouble("topY");
             double bottomX = box.getDouble("bottomX");
