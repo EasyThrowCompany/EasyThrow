@@ -15,6 +15,11 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.simple.parser.ParseException;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
@@ -39,6 +44,9 @@ public class DisplayPhotoActivity extends AppCompatActivity {
         ImageView photoIv = findViewById(R.id.capturedImageView);
         Bundle extras = getIntent().getExtras();
         Uri imageUri = Uri.parse(extras.getString("imageUri"));
+        photoIv.setImageURI(imageUri);
+
+//        ProgressBar progressBar = findViewById(R.id.uploadPb);
 
         String json = "{\"image_uri\": \"abcccccccccc\"}";
 
@@ -52,22 +60,12 @@ public class DisplayPhotoActivity extends AppCompatActivity {
         bitmap = RotateBitmap(bitmap, 90);
         Bitmap bmp = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.RGB_565);
 
-
-        Canvas canvas = new Canvas(bmp);
-        Paint paint = new Paint();
-        paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(10);
-        paint.setColor(Color.RED);
-        canvas.drawBitmap(bitmap, 0, 0, null);
-        canvas.drawRect(0, 0, 100, 100, paint);
-        photoIv.setImageBitmap(bmp);
-
-
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
         byte[] byteArray = stream.toByteArray();
 
         Button uploadBtn = findViewById(R.id.confirmBtn);
+        Bitmap finalBitmap = bitmap;
         uploadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,6 +89,13 @@ public class DisplayPhotoActivity extends AppCompatActivity {
                             String myResponse = response.body().string();
                             System.out.println(myResponse);
                             System.out.println(imageUri);
+                            try {
+                                DrawRectanglesFromJSONResponse(myResponse, finalBitmap, photoIv);
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                             DisplayPhotoActivity.this.runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
@@ -114,7 +119,69 @@ public class DisplayPhotoActivity extends AppCompatActivity {
         });
     }
 
-    public static Bitmap RotateBitmap(Bitmap source, float angle) {
+    public static void DrawRectanglesFromJSONResponse(String response, Bitmap bitmap, ImageView imageView) throws IOException, ParseException, JSONException, JSONException {
+
+        Bitmap bmp = Bitmap.createBitmap(bitmap.getWidth(),bitmap.getHeight(), Bitmap.Config.RGB_565);
+        Canvas canvas = new Canvas(bmp);
+        Paint paint = new Paint();
+
+        canvas.drawBitmap(bitmap,0,0, null);
+
+        JSONObject jo = new JSONObject(response);
+
+        String filename = (String) jo.get("filename");
+
+        JSONArray boxes = jo.getJSONArray("boxes");
+
+        // iterating phoneNumbers
+
+        for (int i = 0; i < boxes.length(); i++) {
+            JSONObject box = ((JSONArray) boxes).getJSONObject(i).getJSONObject("box");
+            double topX = box.getDouble("topX");
+            double topY = box.getDouble("topY");
+            double bottomX = box.getDouble("bottomX");
+            double bottomY = box.getDouble("bottomY");
+            String label = boxes.getJSONObject(i).getString("label");
+            double score = boxes.getJSONObject(i).getDouble("score");
+
+            if(score >= 0.5){
+                int topXPixel = (int) (topX * bitmap.getWidth());
+                int topYPixel = (int) (topY * bitmap.getHeight());
+                int bottomXPixel = (int) (bottomX * bitmap.getWidth());
+                int bottomYPixel = (int) (bottomY * bitmap.getHeight());
+
+                int color;
+
+                if(label.equals("PlasticAndMetal")){
+                    color = Color.YELLOW;
+                } else if( label.equals("Mixed")){
+                    color = Color.BLACK;
+                } else if(label.equals("Glass")){
+                    color = Color.GREEN;
+                } else if(label.equals("Paper")){
+                    color = Color.BLUE;
+                } else if(label.equals("WasteCollectionPoint")){
+                    color = Color.RED;
+                } else {
+                    color = Color.MAGENTA;
+                }
+
+                paint.setStyle(Paint.Style.STROKE);
+                paint.setStrokeWidth(10);
+                paint.setColor(color);
+
+                canvas.drawRect(topXPixel,topYPixel,bottomXPixel,bottomYPixel, paint);
+
+
+            }
+        }
+
+        imageView.setImageBitmap(bmp);
+
+    }
+
+    public static Bitmap RotateBitmap(Bitmap source, float angle)
+    {
         Matrix matrix = new Matrix();
         matrix.postRotate(angle);
         return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
