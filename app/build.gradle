@@ -18,6 +18,12 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    configurations.all {
+        resolutionStrategy.dependencySubstitution {
+            substitute module('org.hamcrest:hamcrest-core:1.1') with module('junit:junit:4.10')
+        }
+    }
+
     buildFeatures{
         viewBinding true
     }
@@ -42,6 +48,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:3.9.1'
     implementation 'androidx.navigation:navigation-fragment:2.4.1'
     implementation 'androidx.navigation:navigation-ui:2.4.1'
+    implementation 'com.googlecode.json-simple:json-simple:1.1.1'
 
     def cameraxVersion = "1.1.0-alpha02"
     implementation "androidx.camera:camera-core:${cameraxVersion}"
